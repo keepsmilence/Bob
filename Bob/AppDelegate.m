@@ -22,6 +22,7 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
+    // https://forums.developer.apple.com/thread/126418
     MMLogInfo(@"程序即将关闭");
     [StatusItem.shared remove];
     [PreferenceManager.shared updateLoginItemWithLaunchAtStartup:PreferenceManager.shared.launchAtStartup];
