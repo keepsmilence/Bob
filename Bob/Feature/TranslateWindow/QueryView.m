@@ -56,7 +56,7 @@ DefineMethodMMMake_m(QueryView)
                 [x setBackgroundColor:DeepDarkColor];
                 [x setTextColor:[NSColor whiteColor]];
             }];
-            RAC(textView, font) = [MMObserve(textView, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+            RAC(textView, font) = [MMObserve(textView, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
                 // TODO: waiting for UI @shenjie
                 switch (fontNumber) {

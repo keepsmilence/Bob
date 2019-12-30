@@ -10,10 +10,11 @@
 #import <ServiceManagement/ServiceManagement.h>
 #import <Sparkle/Sparkle.h>
 
+#define PreferenceKey(property) [NSString stringWithFormat:@"Preference_%@", @keypath(self, property)]
+
 #define MMBindUserDefault(keyPath, defaultValue) \
 {\
-    NSString *_keyPath = @keypath(self, keyPath);\
-    NSString *key = [NSString stringWithFormat:@"Preference_%@", _keyPath];\
+    NSString *key = PreferenceKey(keyPath);\
     if (![[NSUserDefaults standardUserDefaults] objectForKey:key] && defaultValue != nil) {\
         [[NSUserDefaults standardUserDefaults] setObject:defaultValue forKey:key];\
         [[NSUserDefaults standardUserDefaults] synchronize];\
@@ -23,15 +24,15 @@
 
 @implementation PreferenceManager
 
-singleton_m(PreferenceManager)
+mm_singleton_m
 
-+ (instancetype)manager {
-    return [self shared];
-}
-
-- (void)install {
-    [self refreshUserDefault];
-    [self bindPreference];
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self refreshUserDefault];
+        [self bindPreference];
+    }
+    return self;
 }
 
 /// v 0.2.0 之前的自定义 key refresh 为新 key
@@ -44,20 +45,19 @@ singleton_m(PreferenceManager)
 #define kToKey @"configuration_to"
 #define kPinKey @"configuration_pin"
 #define kFoldKey @"configuration_fold"
-    [self refreshOldkey:kAutoCopyTranslateResultKey newKey:@keypath(self, autoCopyTranslateResult)];
-    [self refreshOldkey:kLaunchAtStartupKey newKey:@keypath(self, launchAtStartup)];
-    [self refreshOldkey:kTranslateIdentifierKey newKey:@keypath(self, translateIdentifier)];
-    [self refreshOldkey:kFromKey newKey:@keypath(self, from)];
-    [self refreshOldkey:kToKey newKey:@keypath(self, to)];
-    [self refreshOldkey:kPinKey newKey:@keypath(self, isPin)];
-    [self refreshOldkey:kFoldKey newKey:@keypath(self, isFold)];
+    [self refreshOldkey:kAutoCopyTranslateResultKey newKey:PreferenceKey(autoCopyTranslateResult)];
+    [self refreshOldkey:kLaunchAtStartupKey newKey:PreferenceKey(launchAtStartup)];
+    [self refreshOldkey:kTranslateIdentifierKey newKey:PreferenceKey(translateIdentifier)];
+    [self refreshOldkey:kFromKey newKey:PreferenceKey(from)];
+    [self refreshOldkey:kToKey newKey:PreferenceKey(to)];
+    [self refreshOldkey:kPinKey newKey:PreferenceKey(isPin)];
+    [self refreshOldkey:kFoldKey newKey:PreferenceKey(isFold)];
 }
 
 - (void)refreshOldkey:(NSString *)oldKey newKey:(NSString *)newKey {
-    NSString *saveKey = [NSString stringWithFormat:@"Preference__%@", newKey];
     NSObject *value = [[NSUserDefaults standardUserDefaults] objectForKey:oldKey];
     if (value) {
-        [[NSUserDefaults standardUserDefaults] setObject:value forKey:saveKey];
+        [[NSUserDefaults standardUserDefaults] setObject:value forKey:newKey];
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:oldKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
@@ -73,10 +73,9 @@ singleton_m(PreferenceManager)
     MMBindUserDefault(isFold, @NO);
     MMBindUserDefault(launchAtStartup, @NO);
     RACChannelTo(self, automaticallyChecksForUpdates) = RACChannelTo([SUUpdater sharedUpdater], automaticallyChecksForUpdates);
-    @weakify(self);
-    
+    mm_weakify(self)
     [[RACObserve(self, launchAtStartup) distinctUntilChanged] subscribeNext:^(id  _Nullable x) {
-        @strongify(self);
+        mm_strongify(self)
         [self updateLoginItemWithLaunchAtStartup:[x boolValue]];
     }];
     NSLog(@"%@", self.mj_keyValues);

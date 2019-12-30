@@ -51,7 +51,7 @@
                 [x setTextColor:NSColor.whiteColor];
             }];
 
-            RAC(textField, font) = [MMObserve(textField,[PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+            RAC(textField, font) = [MMObserve(textField,[PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
                 // TODO: waiting for UI @shenjie
                 switch (fontNumber) {
@@ -90,7 +90,7 @@
                     [x setTextColor:NSColor.whiteColor];
                 }];
     
-                RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+                RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                     NSInteger fontNumber = [value integerValue];
                     // TODO: waiting for UI @shenjie
                     switch (fontNumber) {
@@ -148,7 +148,7 @@
                 textField.stringValue = obj.part;
                 textField.textColor = [NSColor mm_colorWithHexString:@"#999999"];
                 
-                RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+                RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                     NSInteger fontNumber = [value integerValue];
                     // TODO: waiting for UI @shenjie
                     switch (fontNumber) {
@@ -189,7 +189,7 @@
                 [x setTextColor:NSColor.whiteColor];
             }];
 
-            RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+            RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
                 // TODO: waiting for UI @shenjie
                 switch (fontNumber) {
@@ -238,7 +238,7 @@
                 [x setTextColor:NSColor.whiteColor];
             }];
             
-            RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+            RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
                 // TODO: waiting for UI @shenjie
                 switch (fontNumber) {
@@ -312,7 +312,7 @@
                 textField.stringValue = obj.part;
                 textField.textColor = [NSColor mm_colorWithHexString:@"#999999"];
                 
-                RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+                RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                     NSInteger fontNumber = [value integerValue];
                     // TODO: waiting for UI @shenjie
                     switch (fontNumber) {
@@ -381,7 +381,7 @@
             } drak:^(id  _Nonnull x) {
                 [x setTextColor:NSColor.whiteColor];
             }];
-            RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+            RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
                 // TODO: waiting for UI @shenjie
                 switch (fontNumber) {
@@ -418,7 +418,7 @@
                 [x setTextColor:NSColor.whiteColor];
             }];
             
-            RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+            RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
                 // TODO: waiting for UI @shenjie
                 switch (fontNumber) {

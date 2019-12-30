@@ -18,12 +18,13 @@
     MMLogInfo(@"程序启动");
     [MMCrash registerHandler];
     [StatusItem.shared setup];
-    [PreferenceManager.manager install];
     [Shortcut setup];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
+    MMLogInfo(@"程序即将关闭");
     [StatusItem.shared remove];
+    [PreferenceManager.shared updateLoginItemWithLaunchAtStartup:PreferenceManager.shared.launchAtStartup];
 }
 
 @end

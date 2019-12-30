@@ -137,7 +137,6 @@
 		C9889F6323AA25C800C2D127 /* google-translate-sign.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "google-translate-sign.js"; sourceTree = "<group>"; };
 		C988B28623B1F12D007C8108 /* DarkModeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DarkModeManager.h; sourceTree = "<group>"; };
 		C988B28723B1F12D007C8108 /* DarkModeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DarkModeManager.m; sourceTree = "<group>"; };
-		C988B28923B1F135007C8108 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		C98C179F239E3F4A00BD02DB /* PreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
 		C98C17A0239E3F4A00BD02DB /* PreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
 		C98C17A2239E40AC00BD02DB /* GeneralViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneralViewController.h; sourceTree = "<group>"; };
@@ -327,7 +326,6 @@
 				C90007F223B3BA710002B6A0 /* NSObject+Feature.m */,
 				C9C4CF3023B7A013009C602E /* PreferenceManager.h */,
 				C9C4CF3123B7A013009C602E /* PreferenceManager.m */,
-				C988B28923B1F135007C8108 /* Singleton.h */,
 			);
 			path = Preference;
 			sourceTree = "<group>";

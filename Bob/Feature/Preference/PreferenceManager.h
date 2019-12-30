@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// 偏好设置与 userdefault 建立绑定关系
 @interface PreferenceManager : NSObject
 
+mm_singleton_h
+
 /// 字号
 @property (nonatomic, assign) NSInteger font;
 @property (nonatomic, assign) BOOL autoCopyTranslateResult;
@@ -26,8 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isPin;
 @property (nonatomic, assign) BOOL isFold;
 
-+ (instancetype)manager;
-- (void)install;
 - (void)updateLoginItemWithLaunchAtStartup:(BOOL)launchAtStartup;
 
 @end

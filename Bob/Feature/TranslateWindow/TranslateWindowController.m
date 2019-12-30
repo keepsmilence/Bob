@@ -105,7 +105,7 @@ static TranslateWindowController *_instance;
     if (!self.hadShow) {
         [self showAtMouseLocation];
     }
-    if (!self.window.visible || !PreferenceManager.manager.isPin) {
+    if (!self.window.visible || !PreferenceManager.shared.isPin) {
         [self showAtMouseLocation];
     }
 }
@@ -146,7 +146,7 @@ static TranslateWindowController *_instance;
     if (Snip.shared.isSnapshotting) {
         return;
     }
-    if (!PreferenceManager.manager.isPin && self.window.visible) {
+    if (!PreferenceManager.shared.isPin && self.window.visible) {
         [self close];
         [CATransaction flush];
     }
@@ -174,7 +174,7 @@ static TranslateWindowController *_instance;
     if (Snip.shared.isSnapshotting) {
         return;
     }
-    PreferenceManager.manager.isFold = NO;
+    PreferenceManager.shared.isFold = NO;
     [self.viewController updateFoldState:NO];
     [self.viewController resetWithState:@"↩︎ 翻译\n⇧ + ↩︎ 换行\n⌘ + R 重试\n⌘ + W 关闭"];
     [self ensureShowAtMouseLocation];

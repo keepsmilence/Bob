@@ -42,7 +42,7 @@
                 [x setTextColor:NSColor.whiteColor];
             }];
             
-            RAC(textField, font) = [MMObserve(textField, [PreferenceManager manager], font) map:^id _Nullable(id  _Nullable value) {
+            RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
                 // TODO: waiting for UI @shenjie
                 switch (fontNumber) {
@@ -136,7 +136,7 @@
     if (actionTitle.length) {
         self.actionButton.hidden = NO;
         [self dispose];
-        self.dispose = [MMObserve(self.actionButton, [PreferenceManager manager], font) subscribeNext:^(id  _Nullable x) {
+        self.dispose = [MMObserve(self.actionButton, [PreferenceManager shared], font) subscribeNext:^(id  _Nullable x) {
             NSInteger fontNumber = [x integerValue];
             // TODO: waiting for UI @shenjie
             switch (fontNumber) {

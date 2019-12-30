@@ -114,7 +114,7 @@ static StatusItem *_instance;
     if (Snip.shared.isSnapshotting) {
         [Snip.shared stop];
     }
-    if (!PreferenceManager.manager.isPin) {
+    if (!PreferenceManager.shared.isPin) {
         [TranslateWindowController.shared close];
     }
     [PreferencesWindowController.shared show];
@@ -143,7 +143,6 @@ static StatusItem *_instance;
 
 - (IBAction)quitAction:(NSMenuItem *)sender {
     NSLog(@"退出应用");
-    [PreferenceManager.manager updateLoginItemWithLaunchAtStartup:PreferenceManager.manager.launchAtStartup];
     [NSApplication.sharedApplication terminate:nil];
 }
 

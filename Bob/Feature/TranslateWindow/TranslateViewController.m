@@ -92,10 +92,10 @@ return; \
 - (void)viewDidAppear {
     [super viewDidAppear];
     
-    if (!PreferenceManager.manager.isPin) {
+    if (!PreferenceManager.shared.isPin) {
         [self.monitor start];
     }
-    if (!PreferenceManager.manager.isFold) {
+    if (!PreferenceManager.shared.isFold) {
         [self makeTextViewBecomeFirstResponser];
     }
 }
@@ -119,7 +119,7 @@ return; \
         [button setButtonType:NSButtonTypeToggle];
         button.image = [NSImage imageNamed:@"pin_normal"];
         button.alternateImage = [NSImage imageNamed:@"pin_selected"];
-        button.mm_isOn = PreferenceManager.manager.isPin;
+        button.mm_isOn = PreferenceManager.shared.isPin;
         button.toolTip = button.mm_isOn ? @"取消钉住" : @"钉住";
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.offset(6);
@@ -128,7 +128,7 @@ return; \
         mm_weakify(button)
         [button setRac_command:[[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
             mm_strongify(button)
-            PreferenceManager.manager.isPin = button.mm_isOn;
+            PreferenceManager.shared.isPin = button.mm_isOn;
             if (button.mm_isOn) {
                 [self.monitor stop];
             }else {
@@ -147,7 +147,7 @@ return; \
         [button setButtonType:NSButtonTypeToggle];
         button.image = [NSImage imageNamed:@"fold_up"];
         button.alternateImage = [NSImage imageNamed:@"fold_down"];
-        button.mm_isOn = PreferenceManager.manager.isFold;
+        button.mm_isOn = PreferenceManager.shared.isFold;
         button.toolTip = button.mm_isOn ? @"展开" : @"折叠";
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.offset(9);
@@ -157,7 +157,7 @@ return; \
         mm_weakify(button)
         [button setRac_command:[[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
             mm_strongify(button)
-            PreferenceManager.manager.isFold = button.mm_isOn;
+            PreferenceManager.shared.isFold = button.mm_isOn;
             [self updateFoldState:button.mm_isOn];
             button.toolTip = button.mm_isOn ? @"展开" : @"折叠";
             return RACSignal.empty;
@@ -186,7 +186,7 @@ return; \
             }
             NSLog(@"%@", link);
             [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:link]];
-            if (!PreferenceManager.manager.isPin) {
+            if (!PreferenceManager.shared.isPin) {
                 [TranslateWindowController.shared close];
             }
             return RACSignal.empty;
@@ -213,7 +213,7 @@ return; \
                     [self playAudioWithText:self.currentResult.text lang:self.currentResult.from];
                 }
             }else {
-                [self playAudioWithText:view.textView.string lang:PreferenceManager.manager.from];
+                [self playAudioWithText:view.textView.string lang:PreferenceManager.shared.from];
             }
         }];
         [view setEnterActionBlock:^(QueryView * _Nonnull view) {
@@ -244,7 +244,7 @@ return; \
             mm_strongify(self);
             Translate *t = [self.translateArray objectAtIndex:index];
             if (t != self.translate) {
-                PreferenceManager.manager.translateIdentifier = t.identifier;
+                PreferenceManager.shared.translateIdentifier = t.identifier;
                 self.translate = t;
                 [self refreshForSwitchTranslate];
             }
@@ -265,14 +265,14 @@ return; \
             }
             return LanguageDescFromEnum([obj integerValue]);
         }]];
-        [button updateWithIndex:[self.translate indexForLanguage:PreferenceManager.manager.from]];
+        [button updateWithIndex:[self.translate indexForLanguage:PreferenceManager.shared.from]];
         mm_weakify(self);
         [button setMenuItemSeletedBlock:^(NSInteger index, NSString *title) {
             mm_strongify(self);
             NSInteger from = [[self.translate.languages objectAtIndex:index] integerValue];
             NSLog(@"from 选中语言 %zd %@", from, LanguageDescFromEnum(from));
-            if (from != PreferenceManager.manager.from) {
-                PreferenceManager.manager.from = from;
+            if (from != PreferenceManager.shared.from) {
+                PreferenceManager.shared.from = from;
                 [self retry];
             }
         }];
@@ -294,11 +294,11 @@ return; \
         mm_weakify(self)
         [button setRac_command:[[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
             mm_strongify(self)
-            Language from = PreferenceManager.manager.from;
-            PreferenceManager.manager.from = PreferenceManager.manager.to;
-            PreferenceManager.manager.to = from;
-            [self.fromLanguageButton updateWithIndex:[self.translate indexForLanguage:PreferenceManager.manager.from]];
-            [self.toLanguageButton updateWithIndex:[self.translate indexForLanguage:PreferenceManager.manager.to]];
+            Language from = PreferenceManager.shared.from;
+            PreferenceManager.shared.from = PreferenceManager.shared.to;
+            PreferenceManager.shared.to = from;
+            [self.fromLanguageButton updateWithIndex:[self.translate indexForLanguage:PreferenceManager.shared.from]];
+            [self.toLanguageButton updateWithIndex:[self.translate indexForLanguage:PreferenceManager.shared.to]];
             [self retry];
             return RACSignal.empty;
         }]];
@@ -318,14 +318,14 @@ return; \
             }
             return LanguageDescFromEnum([obj integerValue]);
         }]];
-        [button updateWithIndex:[self.translate indexForLanguage:PreferenceManager.manager.to]];
+        [button updateWithIndex:[self.translate indexForLanguage:PreferenceManager.shared.to]];
         mm_weakify(self);
         [button setMenuItemSeletedBlock:^(NSInteger index, NSString *title) {
             mm_strongify(self);
             NSInteger to = [[self.translate.languages objectAtIndex:index] integerValue];
             NSLog(@"to 选中语言 %zd %@", to, LanguageDescFromEnum(to));
-            if (to != PreferenceManager.manager.to) {
-                PreferenceManager.manager.to = to;
+            if (to != PreferenceManager.shared.to) {
+                PreferenceManager.shared.to = to;
                 [self retry];
             }
         }];
@@ -334,7 +334,7 @@ return; \
     self.resultView = [ResultView mm_anyMake:^(ResultView *  _Nonnull view) {
         [self.view addSubview:view];
         [view mas_makeConstraints:^(MASConstraintMaker *make) {
-            if (PreferenceManager.manager.isFold) {
+            if (PreferenceManager.shared.isFold) {
                 self.resultTopConstraint = make.top.equalTo(self.pinButton.mas_bottom).offset(2);
             }else {
                 self.resultTopConstraint = make.top.equalTo(self.fromLanguageButton.mas_bottom).offset(12);
@@ -369,7 +369,7 @@ return; \
         }];
     }];
     
-    [self updateFoldState:PreferenceManager.manager.isFold];
+    [self updateFoldState:PreferenceManager.shared.isFold];
 }
 
 - (void)setupTranslate {
@@ -382,7 +382,7 @@ return; \
         [GoogleTranslate new],
     ];
     self.translate = [self.translateArray mm_find:^id(Translate * _Nonnull obj, NSUInteger idx) {
-        return [obj.identifier isEqualToString:PreferenceManager.manager.translateIdentifier] ? obj : nil;
+        return [obj.identifier isEqualToString:PreferenceManager.shared.translateIdentifier] ? obj : nil;
     }];
     if (!self.translate) {
         self.translate = self.translateArray.firstObject;
@@ -399,7 +399,7 @@ return; \
             MMLogVerbose(@"❌ 鼠标在翻译 window 内部点击依旧触发了全局事件");
             return;
         }
-        if (!PreferenceManager.manager.isPin) {
+        if (!PreferenceManager.shared.isPin) {
             // 关闭视图
             [TranslateWindowController.shared close];
             [self.monitor stop];
@@ -434,8 +434,8 @@ return; \
     increaseSeed
     mm_weakify(self)
     [self.translate translate:text
-                         from:PreferenceManager.manager.from
-                           to:PreferenceManager.manager.to
+                         from:PreferenceManager.shared.from
+                           to:PreferenceManager.shared.to
                    completion:^(TranslateResult * _Nullable result, NSError * _Nullable error) {
         mm_strongify(self);
         checkSeed
@@ -450,8 +450,8 @@ return; \
     increaseSeed
     mm_weakify(self)
     [self.translate ocrAndTranslate:image
-                               from:PreferenceManager.manager.from
-                                 to:PreferenceManager.manager.to
+                               from:PreferenceManager.shared.from
+                                 to:PreferenceManager.shared.to
                          ocrSuccess:^(OCRResult * _Nonnull result, BOOL willInvokeTranslateAPI) {
         mm_strongify(self)
         checkSeed
@@ -471,7 +471,7 @@ return; \
 }
 
 - (void)refreshWithTranslateResult:(TranslateResult *)result error:(NSError *)error {
-    if (PreferenceManager.manager.autoCopyTranslateResult) {
+    if (PreferenceManager.shared.autoCopyTranslateResult) {
         // 自动拷贝翻译结果，如果翻译失败，则清空剪切板
         [NSPasteboard mm_generalPasteboardSetString:[NSString mm_stringByCombineComponents:result.normalResults separatedString:@"\n"]];
     }
@@ -509,8 +509,8 @@ return; \
         }
         return LanguageDescFromEnum([obj integerValue]);
     }]];
-    NSInteger fromIndex = [self.translate indexForLanguage:PreferenceManager.manager.from];
-    PreferenceManager.manager.from = [[self.translate.languages objectAtIndex:fromIndex] integerValue];
+    NSInteger fromIndex = [self.translate indexForLanguage:PreferenceManager.shared.from];
+    PreferenceManager.shared.from = [[self.translate.languages objectAtIndex:fromIndex] integerValue];
     [self.fromLanguageButton updateWithIndex:fromIndex];
     
     [self.toLanguageButton updateMenuWithTitleArray:[self.translate.languages mm_map:^id _Nullable(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -519,8 +519,8 @@ return; \
         }
         return LanguageDescFromEnum([obj integerValue]);
     }]];
-    NSInteger toIndex = [self.translate indexForLanguage:PreferenceManager.manager.to];
-    PreferenceManager.manager.to = [[self.translate.languages objectAtIndex:toIndex] integerValue];
+    NSInteger toIndex = [self.translate indexForLanguage:PreferenceManager.shared.to];
+    PreferenceManager.shared.to = [[self.translate.languages objectAtIndex:toIndex] integerValue];
     [self.toLanguageButton updateWithIndex:toIndex];
     
     // 强制重刷

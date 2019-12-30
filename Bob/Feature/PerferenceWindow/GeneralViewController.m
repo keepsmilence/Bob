@@ -45,36 +45,36 @@
     
     [self setupFontSlider];
     
-    self.autoCopyTranslateResultButton.mm_isOn = PreferenceManager.manager.autoCopyTranslateResult;
-    self.launchAtStartupButton.mm_isOn = PreferenceManager.manager.launchAtStartup;
-    self.autoCheckUpdateButton.mm_isOn = PreferenceManager.manager.automaticallyChecksForUpdates;
+    self.autoCopyTranslateResultButton.mm_isOn = PreferenceManager.shared.autoCopyTranslateResult;
+    self.launchAtStartupButton.mm_isOn = PreferenceManager.shared.launchAtStartup;
+    self.autoCheckUpdateButton.mm_isOn = PreferenceManager.shared.automaticallyChecksForUpdates;
 }
 
 - (void)setupFontSlider {
     self.fontSlider.numberOfTickMarks = 3;
     self.fontSlider.maxValue = 2;
     self.fontSlider.minValue = 0;
-    self.fontSlider.integerValue = PreferenceManager.manager.font;
+    self.fontSlider.integerValue = PreferenceManager.shared.font;
 }
 
 - (IBAction)fontDidChanged:(NSSlider *)sender {
 //    NSLog(@"%s: %@", __func__, sender.stringValue);
-    PreferenceManager.manager.font = sender.integerValue;
+    PreferenceManager.shared.font = sender.integerValue;
 }
 
 
 #pragma mark - event
 
 - (IBAction)autoCopyTranslateResultButtonClicked:(NSButton *)sender {
-    PreferenceManager.manager.autoCopyTranslateResult = sender.mm_isOn;
+    PreferenceManager.shared.autoCopyTranslateResult = sender.mm_isOn;
 }
 
 - (IBAction)launchAtStartupButtonClicked:(NSButton *)sender {
-    PreferenceManager.manager.launchAtStartup = sender.mm_isOn;
+    PreferenceManager.shared.launchAtStartup = sender.mm_isOn;
 }
 
 - (IBAction)autoCheckUpdateButtonClicked:(NSButton *)sender {
-    PreferenceManager.manager.automaticallyChecksForUpdates = sender.mm_isOn;
+    PreferenceManager.shared.automaticallyChecksForUpdates = sender.mm_isOn;
 }
 
 #pragma mark - MASPreferencesViewController

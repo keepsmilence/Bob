@@ -17,7 +17,7 @@
 
 @implementation DarkModeManager
 
-singleton_m(DarkModeManager)
+mm_singleton_m
 
 + (instancetype)manager {
     return [self shared];

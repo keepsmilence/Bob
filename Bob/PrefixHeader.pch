@@ -28,7 +28,6 @@
 #import "NSPasteboard+MM.h"
 #import "NSDictionary+MM.h"
 #import "MMOrderedDictionary.h"
-#import "Singleton.h"
 #import "NSObject+Feature.h"
 #import "NSView+Debug.h"
 #import "MMLog.h"
