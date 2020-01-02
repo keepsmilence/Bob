@@ -391,20 +391,29 @@ return; \
 }
 
 - (void)setupMonitor {
-    mm_weakify(self)
+    @weakify(self);
+    [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"KUserTouchDownEscapeNotification" object:nil] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
+        @strongify(self);
+        [self closeIfNeed];
+    }];
+    
     self.monitor = [MMEventMonitor globalMonitorWithEvent:NSEventMaskLeftMouseDown | NSEventMaskRightMouseDown handler:^(NSEvent * _Nonnull event) {
-        mm_strongify(self);
+        @strongify(self);
         if (NSPointInRect([NSEvent mouseLocation], TranslateWindowController.shared.window.frame)) {
             // TODO: 这个问题偶然出现，原因暂未找到
             MMLogVerbose(@"❌ 鼠标在翻译 window 内部点击依旧触发了全局事件");
             return;
         }
-        if (!PreferenceManager.shared.isPin) {
-            // 关闭视图
-            [TranslateWindowController.shared close];
-            [self.monitor stop];
-        }
+        [self closeIfNeed];
     }];
+}
+
+- (void)closeIfNeed {
+    if (!PreferenceManager.shared.isPin) {
+        // 关闭视图
+        [TranslateWindowController.shared close];
+        [self.monitor stop];
+    }
 }
 
 #pragma mark -
