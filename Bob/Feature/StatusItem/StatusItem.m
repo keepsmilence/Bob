@@ -141,6 +141,11 @@ static StatusItem *_instance;
     }
 }
 
+- (IBAction)qqGroupAction:(id)sender {
+    NSLog(@"QQ 群");
+    [NSPasteboard mm_generalPasteboardSetString:@"971584165"];
+}
+
 - (IBAction)quitAction:(NSMenuItem *)sender {
     NSLog(@"退出应用");
     [NSApplication.sharedApplication terminate:nil];
@@ -163,12 +168,7 @@ static StatusItem *_instance;
     }
 }
 
-- (IBAction)qqGroupAction:(id)sender {
-    NSLog(@"QQ 群");
-    [NSPasteboard mm_generalPasteboardSetString:@"971584165"];
-}
-
-#pragma mark -
+#pragma mark - NSMenuDelegate
 
 - (void)menuWillOpen:(NSMenu *)menu {
     void(^configItemShortcut)(NSMenuItem *item, NSString *key) = ^(NSMenuItem *item, NSString *key) {

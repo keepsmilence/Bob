@@ -10,7 +10,6 @@
 // https://stackoverflow.com/questions/17779603/subviews-become-disabled-when-title-bar-is-hidden?rq=1
 
 #import "TranslateWindow.h"
-#import <Carbon/Carbon.h>
 
 @implementation TranslateWindow
 
@@ -36,11 +35,9 @@
     return YES;
 }
 
-- (void)keyDown:(NSEvent *)theEvent{
-    unsigned short  keycode = [theEvent keyCode];
-    if (keycode == kVK_Escape) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"KUserTouchDownEscapeNotification" object:nil];
-    }
+// https://stackoverflow.com/questions/42393336/how-to-close-window-nswindowcontroller-by-hitting-the-esc-key
+- (void)cancel:(id)sender {
+    [self close];
 }
 
 @end

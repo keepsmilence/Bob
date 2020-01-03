@@ -125,9 +125,9 @@ return; \
             make.top.left.offset(6);
             make.width.height.mas_equalTo(32);
         }];
-        mm_weakify(button)
+        mm_weakify(self, button)
         [button setRac_command:[[RACCommand alloc] initWithSignalBlock:^RACSignal * _Nonnull(id  _Nullable input) {
-            mm_strongify(button)
+            mm_strongify(self, button)
             PreferenceManager.shared.isPin = button.mm_isOn;
             if (button.mm_isOn) {
                 [self.monitor stop];
@@ -391,29 +391,20 @@ return; \
 }
 
 - (void)setupMonitor {
-    @weakify(self);
-    [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"KUserTouchDownEscapeNotification" object:nil] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(NSNotification * _Nullable x) {
-        @strongify(self);
-        [self closeIfNeed];
-    }];
-    
+    mm_weakify(self)
     self.monitor = [MMEventMonitor globalMonitorWithEvent:NSEventMaskLeftMouseDown | NSEventMaskRightMouseDown handler:^(NSEvent * _Nonnull event) {
-        @strongify(self);
+        mm_strongify(self);
         if (NSPointInRect([NSEvent mouseLocation], TranslateWindowController.shared.window.frame)) {
             // TODO: 这个问题偶然出现，原因暂未找到
             MMLogVerbose(@"❌ 鼠标在翻译 window 内部点击依旧触发了全局事件");
             return;
         }
-        [self closeIfNeed];
+        if (!PreferenceManager.shared.isPin) {
+            // 关闭视图
+            [self.monitor stop];
+            [TranslateWindowController.shared close];
+        }
     }];
-}
-
-- (void)closeIfNeed {
-    if (!PreferenceManager.shared.isPin) {
-        // 关闭视图
-        [TranslateWindowController.shared close];
-        [self.monitor stop];
-    }
 }
 
 #pragma mark -
