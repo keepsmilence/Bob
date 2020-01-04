@@ -58,16 +58,16 @@ DefineMethodMMMake_m(QueryView)
             }];
             RAC(textView, font) = [MMObserve(textView, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
-                // TODO: waiting for UI @shenjie
+    
                 switch (fontNumber) {
                     case 0:
-                        return [NSFont systemFontOfSize:12];
+                        return [NSFont systemFontOfSize:13];
                     case 1:
-                        return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:14];
                     case 2:
-                        return [NSFont systemFontOfSize:18];
+                        return [NSFont systemFontOfSize:15];
                         default:
-                    return [NSFont systemFontOfSize:15];
+                    return [NSFont systemFontOfSize:13];
                 }
             }];
             

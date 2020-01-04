@@ -50,19 +50,19 @@
             } drak:^(id  _Nonnull x) {
                 [x setTextColor:NSColor.whiteColor];
             }];
-
+            
             RAC(textField, font) = [MMObserve(textField,[PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
-                // TODO: waiting for UI @shenjie
+    
                 switch (fontNumber) {
                     case 0:
                         return [NSFont systemFontOfSize:13];
                     case 1:
-                        return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:14];
                     case 2:
-                        return [NSFont systemFontOfSize:18];
-                        default:
-                    return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:15];
+                    default:
+                        return [NSFont systemFontOfSize:13];
                 }
             }];
             textField.editable = NO;
@@ -89,19 +89,19 @@
                 } drak:^(id  _Nonnull x) {
                     [x setTextColor:NSColor.whiteColor];
                 }];
-    
+                
                 RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                     NSInteger fontNumber = [value integerValue];
-                    // TODO: waiting for UI @shenjie
+        
                     switch (fontNumber) {
                         case 0:
                             return [NSFont systemFontOfSize:13];
                         case 1:
-                            return [NSFont systemFontOfSize:15];
+                            return [NSFont systemFontOfSize:14];
                         case 2:
-                            return [NSFont systemFontOfSize:18];
-                            default:
-                        return [NSFont systemFontOfSize:15];
+                            return [NSFont systemFontOfSize:15];
+                        default:
+                            return [NSFont systemFontOfSize:15];
                     }
                 }];
                 textField.editable = NO;
@@ -150,16 +150,16 @@
                 
                 RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                     NSInteger fontNumber = [value integerValue];
-                    // TODO: waiting for UI @shenjie
+        
                     switch (fontNumber) {
                         case 0:
                             return [NSFont systemFontOfSize:13];
                         case 1:
-                            return [NSFont systemFontOfSize:15];
+                            return [NSFont systemFontOfSize:14];
                         case 2:
-                            return [NSFont systemFontOfSize:18];
-                            default:
-                        return [NSFont systemFontOfSize:15];
+                            return [NSFont systemFontOfSize:15];
+                        default:
+                            return [NSFont systemFontOfSize:13];
                     }
                 }];
                 textField.editable = NO;
@@ -188,19 +188,19 @@
             } drak:^(id  _Nonnull x) {
                 [x setTextColor:NSColor.whiteColor];
             }];
-
+            
             RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
-                // TODO: waiting for UI @shenjie
+    
                 switch (fontNumber) {
                     case 0:
                         return [NSFont systemFontOfSize:13];
                     case 1:
-                        return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:14];
                     case 2:
-                        return [NSFont systemFontOfSize:18];
-                        default:
-                    return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:15];
+                    default:
+                        return [NSFont systemFontOfSize:13];
                 }
             }];
             textField.backgroundColor = NSColor.clearColor;
@@ -240,16 +240,16 @@
             
             RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
-                // TODO: waiting for UI @shenjie
+    
                 switch (fontNumber) {
                     case 0:
                         return [NSFont systemFontOfSize:13];
                     case 1:
-                        return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:14];
                     case 2:
-                        return [NSFont systemFontOfSize:18];
-                        default:
-                    return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:15];
+                    default:
+                        return [NSFont systemFontOfSize:15];
                 }
             }];
             textField.editable = NO;
@@ -276,8 +276,26 @@
                 button.imageScaling = NSImageScaleProportionallyDown;
                 button.bezelStyle = NSBezelStyleRegularSquare;
                 [button setButtonType:NSButtonTypeMomentaryChange];
-                button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj font:[NSFont systemFontOfSize:13] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
-                [button sizeToFit];
+                
+                [MMObserve(button, [PreferenceManager shared], font) subscribeNext:^(id  _Nullable x) {
+                    NSInteger fontNumber = [x integerValue];
+        
+                    switch (fontNumber) {
+                        case 0:
+                            button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj font:[NSFont systemFontOfSize:13] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                            break;
+                        case 1:
+                            button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj font:[NSFont systemFontOfSize:14] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                            break;
+                        case 2:
+                            button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj font:[NSFont systemFontOfSize:15] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                            break;
+                        default:
+                            button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj font:[NSFont systemFontOfSize:13] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                    }
+                    [button sizeToFit];
+                }];
+                
                 [button mas_makeConstraints:^(MASConstraintMaker *make) {
                     if (idx == 0) {
                         make.left.equalTo(nameTextFiled.mas_right);
@@ -314,16 +332,16 @@
                 
                 RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                     NSInteger fontNumber = [value integerValue];
-                    // TODO: waiting for UI @shenjie
+        
                     switch (fontNumber) {
                         case 0:
                             return [NSFont systemFontOfSize:13];
                         case 1:
-                            return [NSFont systemFontOfSize:15];
+                            return [NSFont systemFontOfSize:14];
                         case 2:
-                            return [NSFont systemFontOfSize:18];
-                            default:
-                        return [NSFont systemFontOfSize:15];
+                            return [NSFont systemFontOfSize:15];
+                        default:
+                            return [NSFont systemFontOfSize:13];
                     }
                 }];
                 textField.editable = NO;
@@ -348,9 +366,26 @@
             button.imageScaling = NSImageScaleProportionallyDown;
             button.bezelStyle = NSBezelStyleRegularSquare;
             [button setButtonType:NSButtonTypeMomentaryChange];
-            button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj.word font:[NSFont systemFontOfSize:13] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+            [MMObserve(button, [PreferenceManager shared], font) subscribeNext:^(id  _Nullable x) {
+                NSInteger fontNumber = [x integerValue];
+    
+                switch (fontNumber) {
+                    case 0:
+                        button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj.word font:[NSFont systemFontOfSize:13] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                        break;
+                    case 1:
+                        button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj.word font:[NSFont systemFontOfSize:14] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                        break;
+                    case 2:
+                        button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj.word font:[NSFont systemFontOfSize:15] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                        break;
+                    default:
+                        button.attributedTitle = [NSAttributedString mm_attributedStringWithString:obj.word font:[NSFont systemFontOfSize:13] color:[NSColor mm_colorWithHexString:@"#007AFF"]];
+                }
+                [button sizeToFit];
+            }];
             // TODO:
-            [button sizeToFit];
+            
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.offset(kMargin);
                 if (partTextFiled) {
@@ -383,16 +418,16 @@
             }];
             RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
-                // TODO: waiting for UI @shenjie
+    
                 switch (fontNumber) {
                     case 0:
                         return [NSFont systemFontOfSize:13];
                     case 1:
-                        return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:14];
                     case 2:
-                        return [NSFont systemFontOfSize:18];
-                        default:
-                    return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:15];
+                    default:
+                        return [NSFont systemFontOfSize:13];
                 }
             }];
             
@@ -420,16 +455,16 @@
             
             RAC(textField, font) = [MMObserve(textField, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
                 NSInteger fontNumber = [value integerValue];
-                // TODO: waiting for UI @shenjie
+    
                 switch (fontNumber) {
                     case 0:
                         return [NSFont systemFontOfSize:13];
                     case 1:
-                        return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:14];
                     case 2:
-                        return [NSFont systemFontOfSize:18];
-                        default:
-                    return [NSFont systemFontOfSize:15];
+                        return [NSFont systemFontOfSize:15];
+                    default:
+                        return [NSFont systemFontOfSize:13];
                 }
             }];
             textField.backgroundColor = NSColor.clearColor;
