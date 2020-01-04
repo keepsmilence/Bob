@@ -36,9 +36,13 @@ mm_singleton_m
 }
 
 - (void)fetch {
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
-    id style = [dict objectForKey:@"AppleInterfaceStyle"];
-    self.systemDarkMode = ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
+    if (@available(macOS 10.12, *)) {
+        NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
+        id style = [dict objectForKey:@"AppleInterfaceStyle"];
+        self.systemDarkMode = ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
+    } else {
+        self.systemDarkMode = NO;
+    }
 }
 
 - (void)monitor {
@@ -47,14 +51,20 @@ mm_singleton_m
 }
 
 - (void)updateDarkMode {
-    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
-    id style = [dict objectForKey:@"AppleInterfaceStyle"];
-    BOOL isDarkMode = ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
-    if (isDarkMode) {
-        NSLog(@"黑夜模式");
+    BOOL isDarkMode = NO;
+    if (@available(macOS 10.12, *)) {
+        NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
+        id style = [dict objectForKey:@"AppleInterfaceStyle"];
+        isDarkMode = ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"] );
+        if (isDarkMode) {
+            NSLog(@"黑夜模式");
+        } else {
+            NSLog(@"正常模式");
+        }
     } else {
-        NSLog(@"正常模式");
+        isDarkMode = NO;
     }
+    
     self.systemDarkMode = isDarkMode;
 }
 
