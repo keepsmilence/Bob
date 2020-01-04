@@ -72,7 +72,7 @@
                     </constraints>
                 </box>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="29j-qh-lea" customClass="MASShortcutView">
-                    <rect key="frame" x="157" y="162" width="130" height="25"/>
+                    <rect key="frame" x="155" y="162" width="130" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="130" id="4J6-bU-vIi"/>
                         <constraint firstAttribute="height" constant="25" id="6Sz-27-yQi"/>
@@ -136,7 +136,7 @@
                 <constraint firstItem="JZI-C8-iw8" firstAttribute="trailing" secondItem="01Q-Sk-Jhp" secondAttribute="trailing" id="Qin-tY-RsA"/>
                 <constraint firstItem="hbv-Im-TzA" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="32" id="V5K-fQ-SIK"/>
                 <constraint firstItem="sCf-ch-6bJ" firstAttribute="top" secondItem="hbv-Im-TzA" secondAttribute="bottom" constant="17" id="ZEt-3z-G9T"/>
-                <constraint firstItem="29j-qh-lea" firstAttribute="leading" secondItem="E7D-SM-ttH" secondAttribute="trailing" constant="10" id="aWH-OE-ol1"/>
+                <constraint firstItem="29j-qh-lea" firstAttribute="leading" secondItem="E7D-SM-ttH" secondAttribute="trailing" constant="8" id="aWH-OE-ol1"/>
                 <constraint firstItem="rdS-e7-tO0" firstAttribute="leading" secondItem="vKL-Rb-7ex" secondAttribute="leading" id="b6F-td-z0L"/>
                 <constraint firstItem="rdS-e7-tO0" firstAttribute="leading" secondItem="4dL-3k-Qcg" secondAttribute="leading" id="bCp-Jd-PhA"/>
                 <constraint firstItem="JZI-C8-iw8" firstAttribute="top" secondItem="vKL-Rb-7ex" secondAttribute="bottom" constant="18" id="cyq-uC-HC9"/>
