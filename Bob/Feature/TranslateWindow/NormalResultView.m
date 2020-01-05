@@ -59,18 +59,7 @@ DefineMethodMMMake_m(NormalResultView)
                 [x setTextColor:[NSColor whiteColor]];
             }];
             RAC(textView, font) = [MMObserve(textView, [PreferenceManager shared], font) map:^id _Nullable(id  _Nullable value) {
-                NSInteger fontNumber = [value integerValue];
-    
-                switch (fontNumber) {
-                    case 0:
-                        return [NSFont systemFontOfSize:13];
-                    case 1:
-                        return [NSFont systemFontOfSize:14];
-                    case 2:
-                        return [NSFont systemFontOfSize:15];
-                        default:
-                    return [NSFont systemFontOfSize:13];
-                }
+                return [NSFont systemAutoFontWithSize:14];
             }];
             [textView setAutoresizingMask:NSViewHeightSizable | NSViewWidthSizable];
         }];
@@ -148,7 +137,7 @@ DefineMethodMMMake_m(NormalResultView)
         // 视图间距 + textContainerInset （纵向滚动条宽度15暂时不需要考虑）
         textViewWidth = TranslateWindowController.shared.window.width - 12 * 2 - self.textView.textContainerInset.width * 2;
     }
-        
+    
     CGFloat height = [self heightForString:self.textView.attributedString width:textViewWidth];
     height += self.textView.textContainerInset.height * 2;
     // TODO: 有时候高度计算会显示出滚动条，没解决之前先加个10吧
@@ -163,7 +152,7 @@ DefineMethodMMMake_m(NormalResultView)
     }else {
         // self.scrollView.hasVerticalScroller = NO;
     }
-        
+    
     self.scrollViewHeightConstraint.equalTo(@(height));
 }
 

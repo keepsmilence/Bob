@@ -20,6 +20,7 @@
 		C91DF6B023A35E07009CB158 /* MMOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = C91DF6AE23A35E07009CB158 /* MMOrderedDictionary.m */; };
 		C91DF6B323A375E5009CB158 /* YoudaoTranslateResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C91DF6B223A375E5009CB158 /* YoudaoTranslateResponse.m */; };
 		C91DF6B723A390A7009CB158 /* YoudaoOCRResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C91DF6B623A390A7009CB158 /* YoudaoOCRResponse.m */; };
+		C92EC61D23C1E5C00078767E /* NSFont+MM.m in Sources */ = {isa = PBXBuildFile; fileRef = C92EC61C23C1E5C00078767E /* NSFont+MM.m */; };
 		C959D33A238809B800DD8808 /* OCRResult.m in Sources */ = {isa = PBXBuildFile; fileRef = C959D339238809B800DD8808 /* OCRResult.m */; };
 		C9676F2B23A0908F007DD023 /* NSPasteboard+MM.m in Sources */ = {isa = PBXBuildFile; fileRef = C9676F2A23A0908F007DD023 /* NSPasteboard+MM.m */; };
 		C9889F6123AA0FDA00C2D127 /* GoogleTranslate.m in Sources */ = {isa = PBXBuildFile; fileRef = C9889F6023AA0FDA00C2D127 /* GoogleTranslate.m */; };
@@ -128,6 +129,8 @@
 		C91DF6B223A375E5009CB158 /* YoudaoTranslateResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoudaoTranslateResponse.m; sourceTree = "<group>"; };
 		C91DF6B523A390A7009CB158 /* YoudaoOCRResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YoudaoOCRResponse.h; sourceTree = "<group>"; };
 		C91DF6B623A390A7009CB158 /* YoudaoOCRResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YoudaoOCRResponse.m; sourceTree = "<group>"; };
+		C92EC61B23C1E5C00078767E /* NSFont+MM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSFont+MM.h"; sourceTree = "<group>"; };
+		C92EC61C23C1E5C00078767E /* NSFont+MM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFont+MM.m"; sourceTree = "<group>"; };
 		C959D338238809B800DD8808 /* OCRResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCRResult.h; sourceTree = "<group>"; };
 		C959D339238809B800DD8808 /* OCRResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCRResult.m; sourceTree = "<group>"; };
 		C9676F2923A0908F007DD023 /* NSPasteboard+MM.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSPasteboard+MM.h"; sourceTree = "<group>"; };
@@ -586,6 +589,8 @@
 				C9676F2A23A0908F007DD023 /* NSPasteboard+MM.m */,
 				C9D679CA23A3403F0073957C /* NSDictionary+MM.h */,
 				C9D679CB23A3403F0073957C /* NSDictionary+MM.m */,
+				C92EC61B23C1E5C00078767E /* NSFont+MM.h */,
+				C92EC61C23C1E5C00078767E /* NSFont+MM.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -827,6 +832,7 @@
 				C910457023A3AF44001D5211 /* Translate.m in Sources */,
 				C9C3BDCA238E76C800D5F1C1 /* SnipWindow.m in Sources */,
 				C99EEBD52385799D00FEE666 /* Selection.m in Sources */,
+				C92EC61D23C1E5C00078767E /* NSFont+MM.m in Sources */,
 				C99EEBCE2385799D00FEE666 /* TranslateViewController.m in Sources */,
 				C99EEBC82385799D00FEE666 /* BaiduTranslateResponse.m in Sources */,
 				C99EEBDA2385799D00FEE666 /* NSButton+MM.m in Sources */,

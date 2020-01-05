@@ -58,7 +58,6 @@
 }
 
 - (IBAction)fontDidChanged:(NSSlider *)sender {
-//    NSLog(@"%s: %@", __func__, sender.stringValue);
     PreferenceManager.shared.font = sender.integerValue;
 }
 
